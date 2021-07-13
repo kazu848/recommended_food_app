@@ -1,4 +1,6 @@
 class FoodsController < ApplicationController
+  before_action :set_food, only: %i[edit update destroy]
+
   def index
     @foods = Food.includes(:user).order(:created_at)
   end
@@ -22,11 +24,19 @@ class FoodsController < ApplicationController
 
   def update; end
 
-  def destroy; end
+  def destroy
+    @post.destroy!
+    redirect_to root_path
+  end
 
   private
 
   def food_params
     params.require(:food).permit(:name, :comment)
+  end
+
+  def set_food
+    @post = current_user.foods.find_by(id: params[:id])
+    redirect_to root_path, alert: "権限がありません" if @food.nil?
   end
 end
