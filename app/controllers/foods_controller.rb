@@ -22,10 +22,13 @@ class FoodsController < ApplicationController
     @food = Food.find(params[:id])
   end
 
-  def update; end
+  def update
+    @food.update!(food_params)
+    redirect_to @food
+  end
 
   def destroy
-    @post.destroy!
+    @food.destroy!
     redirect_to root_path
   end
 
@@ -36,7 +39,7 @@ class FoodsController < ApplicationController
   end
 
   def set_food
-    @post = current_user.foods.find_by(id: params[:id])
+    @food = current_user.foods.find_by(id: params[:id])
     redirect_to root_path, alert: "権限がありません" if @food.nil?
   end
 end
