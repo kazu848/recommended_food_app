@@ -25,6 +25,7 @@ gem "bootsnap", ">= 1.4.4", require: false
 # ログイン機能
 gem "devise"
 # 他言語対応
+gem "carrierwave", "~> 2.0"
 gem "devise-i18n"
 gem "faker", require: false
 gem "rails-i18n", "~> 6.0"
